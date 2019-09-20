@@ -13,7 +13,7 @@ export const HeaderNav = styled.nav`
 
   margin: 0 auto;
   height: 70px;
-  max-width: 1040px;
+  max-width: 1140px;
 
   @media (min-width: 700px) {
     justify-content: space-between;
@@ -79,6 +79,7 @@ export const HeaderUser = styled.div`
   padding: 0 20px;
 
   border-left: 1px solid #adadad;
+
   @media (min-width: 700px) {
     border: none;
   }
