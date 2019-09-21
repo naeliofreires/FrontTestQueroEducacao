@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import Colors from '../utils/constants/colors';
+
 export default createGlobalStyle`
   *{
     margin: 0;
@@ -15,7 +17,7 @@ export default createGlobalStyle`
   body {
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
-    background: #FFF;
+    background: ${Colors.Background};
     font-family: "Montserrat", sans-serif;
   }
 

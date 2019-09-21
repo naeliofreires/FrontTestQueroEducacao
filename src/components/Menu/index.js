@@ -27,7 +27,13 @@ export default function Menu() {
           <S.MenuLink to="/">Bolsas favoritas </S.MenuLink>
         </div>
       </S.MenuBoxLinks>
-      <div className="icon" onClick={() => openMenu()}>
+      <div
+        className="icon"
+        role="button"
+        tabIndex={0}
+        onKeyDown={openMenu}
+        onClick={openMenu}
+      >
         Menu {menuOpen ? <S.ArrowIconUp /> : <S.ArrowIconDown />}
       </div>
     </S.MenuWrapper>
