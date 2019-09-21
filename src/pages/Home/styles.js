@@ -7,6 +7,7 @@ export const HomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
+  height: 100%;
   margin: 0 auto;
   padding: 0 20px;
   max-width: 1140px;
@@ -119,5 +120,9 @@ export const HomeContainerScholarships = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 200px;
+  margin: 30px 0;
+
+  @media screen and (min-width: 600px) {
+    justify-content: flex-start;
+  }
 `;

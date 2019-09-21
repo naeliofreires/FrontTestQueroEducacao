@@ -1,5 +1,7 @@
 import React from 'react';
 
+import AddScholarships from '../../components/AddScholarships';
+
 import * as S from './styles';
 
 export default function Home() {
@@ -29,7 +31,7 @@ export default function Home() {
       </S.HomeSubMenu>
 
       <S.HomeContainerScholarships>
-        <div>criar component</div>
+        <AddScholarships />
       </S.HomeContainerScholarships>
     </S.HomeWrapper>
   );
