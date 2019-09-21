@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import Routes from './routes';
+import Menu from './components/Menu';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -12,6 +13,7 @@ function App() {
     <BrowserRouter>
       <GlobalStyle />
       <Header />
+      <Menu />
       <Routes />
       <Footer />
     </BrowserRouter>

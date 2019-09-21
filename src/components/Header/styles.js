@@ -4,6 +4,8 @@ import { UserCircle } from 'styled-icons/boxicons-regular/UserCircle';
 import { Exclamation } from 'styled-icons/evil/Exclamation';
 import { Whatsapp } from 'styled-icons/fa-brands/Whatsapp';
 
+import Colors from '../../utils/constants/colors';
+
 export const HeaderWrapper = styled.header``;
 
 export const HeaderNav = styled.nav`
@@ -33,7 +35,7 @@ export const HeaderInfo = styled.div`
 
 export const HeaderHowWork = styled.div`
   padding: 0 20px;
-  color: #18acc4;
+  color: ${Colors.MainBlue};
   font-weight: bold;
   border-right: 1px solid #adadad;
   display: flex;
@@ -67,7 +69,7 @@ export const HeaderContact = styled.div`
 `;
 
 export const HeaderContactBox = styled.div`
-  color: #18acc4;
+  color: ${Colors.MainBlue};
   font-weight: bold;
   display: flex;
   flex-direction: column;
@@ -86,7 +88,7 @@ export const HeaderUser = styled.div`
 `;
 
 export const HeaderUserName = styled.div`
-  color: #18acc4;
+  color: ${Colors.MainBlue};
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -128,4 +130,5 @@ export const WhatsappIcon = styled(Whatsapp)`
 
 export const UserCircleIcon = styled(UserCircle)`
   width: 22px;
+  margin: 5px;
 `;

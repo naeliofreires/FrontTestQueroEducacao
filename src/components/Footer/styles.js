@@ -6,10 +6,7 @@ import { Chat } from 'styled-icons/boxicons-regular/Chat';
 import { Mail } from 'styled-icons/feather/Mail';
 import { InfoCircle as Info } from 'styled-icons/boxicons-regular/InfoCircle';
 
-const Colors = {
-  MainBlue: '#18ACC4',
-  SecondaryBlue: '#007A8D',
-};
+import Colors from '../../utils/constants/colors';
 
 export const FooterWrapper = styled.footer`
   background: ${Colors.MainBlue};
