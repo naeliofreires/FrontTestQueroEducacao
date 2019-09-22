@@ -7,5 +7,5 @@ export default {
   Green: '#0FA866',
   Black: '#1F2D30',
   Gray: '#adadad',
-  OverlayModal: '#1F2D30',
+  OverlayModal: 'rgba(31,45,48,0.88)',
 };

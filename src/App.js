@@ -8,6 +8,8 @@ import Footer from './components/Footer';
 
 import GlobalStyle from './styles/global';
 
+import 'rc-slider/assets/index.css';
+
 function App() {
   return (
     <BrowserRouter>

@@ -3,6 +3,8 @@ import { createGlobalStyle } from 'styled-components';
 import Colors from '../utils/constants/colors';
 
 export default createGlobalStyle`
+
+
   *{
     margin: 0;
     padding: 0;
@@ -18,10 +20,21 @@ export default createGlobalStyle`
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
     background: ${Colors.Background};
-    font-family: "Montserrat", sans-serif;
+    font-family:sans-serif;
   }
 
   button {
     cursor: pointer;
+  }
+
+  select {
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  select::-ms-expand {
+    display: none;
   }
 `;
