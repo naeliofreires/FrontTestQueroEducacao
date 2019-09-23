@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Slider from 'rc-slider';
 import uuid from 'uuid';
 
@@ -11,6 +11,9 @@ import { formatPrice } from '../../utils/format';
 import * as S from './styles';
 
 export default function SelectScholarships() {
+  const [eadCheckd, setEadCheckd] = useState(false);
+  const [presential, setPresential] = useState(false);
+
   const [price, setPrice] = useState(1000);
   const [scholarships, setScholarships] = useState([]);
   const [scholarshipsFiltered, setScholarshipsFiltered] = useState([]);
@@ -34,12 +37,25 @@ export default function SelectScholarships() {
     loadScholarships();
   }, []);
 
-  function filter(value) {
-    const filtered = scholarships.filter(s => s.full_price <= value);
+  function filter() {
+    let filtered = scholarships.filter(s => s.full_price <= price);
 
-    setPrice(value);
+    if (eadCheckd) {
+      filtered = filtered.filter(s => s.course.kind === 'EaD');
+    }
+
+    if (presential) {
+      filtered = filtered.filter(s => s.course.kind === 'Presencial');
+    }
+
     setScholarshipsFiltered(filtered);
   }
+
+  useEffect(() => {
+    filter();
+  }, [price, eadCheckd, presential]);
+
+  const priceFormated = useMemo(() => formatPrice(price), [price]);
 
   return (
     <S.Wrapper>
@@ -75,13 +91,25 @@ export default function SelectScholarships() {
           <S.Label>COMO VOCÊ QUER ESTUDAR?</S.Label>
           <form>
             <label htmlFor="presencial">
-              <input type="checkbox" name="presencial" id="presencial" />
+              <input
+                id="presencial"
+                type="checkbox"
+                name="presencial"
+                checked={presential}
+                onChange={e => setPresential(e.target.checked)}
+              />
               Presencial
             </label>
 
             <label htmlFor="distancia">
-              <input type="checkbox" name="distancia" id="distancia" />A
-              distância
+              <input
+                id="distancia"
+                type="checkbox"
+                name="distancia"
+                checked={eadCheckd}
+                onChange={e => setEadCheckd(e.target.checked)}
+              />
+              A distância
             </label>
           </form>
         </div>
@@ -89,12 +117,12 @@ export default function SelectScholarships() {
         <div className="box-slide">
           <S.Label> ATÉ QUANTO PODE PAGAR?</S.Label>
           <div className="slide">
-            {`R$${price}`}
+            {priceFormated}
             <Slider
               min={1000}
               max={10000}
               style={{ padding: '20px 0' }}
-              onChange={value => filter(value)}
+              onChange={value => setPrice(value)}
             />
           </div>
         </div>
