@@ -15,6 +15,8 @@ const EAD = 'EaD';
 const PRESENTIAL = 'Presencial';
 
 export default function SelectScholarships() {
+  const [citys, setCitys] = useState([]);
+  const [courses, setCoures] = useState([]);
   const [eadCheckd, setEadCheckd] = useState(false);
   const [presential, setPresential] = useState(false);
   const [orderByName, setOrderByName] = useState(false);
@@ -22,6 +24,26 @@ export default function SelectScholarships() {
   const [price, setPrice] = useState(1000);
   const [scholarships, setScholarships] = useState([]);
   const [scholarshipsFiltered, setScholarshipsFiltered] = useState([]);
+
+  function extractCities(array) {
+    const result = [];
+
+    array.forEach(
+      ({ campus: { city } }) => !result.includes(city) && result.push(city)
+    );
+
+    setCitys(result.sort());
+  }
+
+  function extractCourses(array) {
+    const result = [];
+
+    array.forEach(
+      ({ course: { name } }) => !result.includes(name) && result.push(name)
+    );
+
+    setCoures(result.sort());
+  }
 
   useEffect(() => {
     async function loadScholarships() {
@@ -36,27 +58,29 @@ export default function SelectScholarships() {
         };
       });
 
+      extractCities(data);
+      extractCourses(data);
       setScholarships(data);
     }
 
     loadScholarships();
   }, []);
 
-  function filter() {
-    let filtered = scholarships.filter(s => s.full_price <= price);
-
-    if (eadCheckd) {
-      filtered = filtered.filter(s => s.course.kind === EAD);
-    }
-
-    if (presential) {
-      filtered = filtered.filter(s => s.course.kind === PRESENTIAL);
-    }
-
-    setScholarshipsFiltered(filtered);
-  }
-
   useEffect(() => {
+    function filter() {
+      let filtered = scholarships.filter(s => s.full_price <= price);
+
+      if (eadCheckd) {
+        filtered = filtered.filter(s => s.course.kind === EAD);
+      }
+
+      if (presential) {
+        filtered = filtered.filter(s => s.course.kind === PRESENTIAL);
+      }
+
+      setScholarshipsFiltered(filtered);
+    }
+
     filter();
   }, [price, eadCheckd, presential]);
 
@@ -84,9 +108,12 @@ export default function SelectScholarships() {
         <form action="">
           <S.Label>SELECIONE SUA CIDADE</S.Label>
           <select id="city">
-            <option value="a">São Jose dos Campos</option>
-            <option value="b">Fortaleza</option>
-            <option value="c">Quixada</option>
+            <option value="" />
+            {citys.map(city => (
+              <option key={city} value={city}>
+                {city}
+              </option>
+            ))}
           </select>
         </form>
 
@@ -94,10 +121,11 @@ export default function SelectScholarships() {
           <S.Label>SELECIONE O CURSO DE SUA PREFERENCIA</S.Label>
           <select id="course">
             <option value="" />
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
+            {courses.map(course => (
+              <option key={course} value={course}>
+                {course}
+              </option>
+            ))}
           </select>
         </form>
       </S.BoxSelect>
