@@ -25,19 +25,17 @@ export const CardCheckImg = styled.div`
     flex: 1;
   }
 
-  img {
+  > div {
     flex: 2;
-    padding: 10px;
-    display: block;
-    max-width: 100%;
+    padding: 20px;
+    img {
+      display: block;
+      max-width: 100%;
+    }
   }
 
   @media screen and (min-width: 600px) {
     flex: 1;
-
-    img {
-      padding: 20px;
-    }
   }
 `;
 

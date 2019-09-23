@@ -7,12 +7,17 @@ import Card from '../Card';
 
 import api from '../../services/api';
 import { formatPrice } from '../../utils/format';
+import { orderASC, orderDESC } from '../../utils/functions/order';
 
 import * as S from './styles';
+
+const EAD = 'EaD';
+const PRESENTIAL = 'Presencial';
 
 export default function SelectScholarships() {
   const [eadCheckd, setEadCheckd] = useState(false);
   const [presential, setPresential] = useState(false);
+  const [orderByName, setOrderByName] = useState(false);
 
   const [price, setPrice] = useState(1000);
   const [scholarships, setScholarships] = useState([]);
@@ -41,11 +46,11 @@ export default function SelectScholarships() {
     let filtered = scholarships.filter(s => s.full_price <= price);
 
     if (eadCheckd) {
-      filtered = filtered.filter(s => s.course.kind === 'EaD');
+      filtered = filtered.filter(s => s.course.kind === EAD);
     }
 
     if (presential) {
-      filtered = filtered.filter(s => s.course.kind === 'Presencial');
+      filtered = filtered.filter(s => s.course.kind === PRESENTIAL);
     }
 
     setScholarshipsFiltered(filtered);
@@ -54,6 +59,17 @@ export default function SelectScholarships() {
   useEffect(() => {
     filter();
   }, [price, eadCheckd, presential]);
+
+  function orderscholarshipsByNameScholl() {
+    const func = orderByName ? orderDESC : orderASC;
+
+    const result =
+      scholarshipsFiltered.length > 0
+        ? scholarshipsFiltered.sort(func)
+        : scholarships.sort(func);
+
+    setScholarshipsFiltered(result);
+  }
 
   const priceFormated = useMemo(() => formatPrice(price), [price]);
 
@@ -135,8 +151,14 @@ export default function SelectScholarships() {
           <div className="oder-by-name">
             Ordernar por
             <label htmlFor="filter-name">
-              <input type="checkbox" id="filter-name" />
-              Nome da Faculdade <S.ArrowDownIcon />
+              <input
+                type="checkbox"
+                id="filter-name"
+                onClick={orderscholarshipsByNameScholl}
+                onChange={e => setOrderByName(e.target.checked)}
+              />
+              Nome da Faculdade
+              {orderByName ? <S.ArrowDownIcon /> : <S.ArrowUpIcon />}
             </label>
           </div>
         </div>

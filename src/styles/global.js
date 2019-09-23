@@ -12,6 +12,10 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   html, body, #root {
     height: 100%;
   }

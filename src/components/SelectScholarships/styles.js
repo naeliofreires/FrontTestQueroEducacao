@@ -144,7 +144,9 @@ export const ContainerScholarships = styled.div`
  * Icons
  */
 
-export const ArrowUpIcon = styled(ArrowUp)``;
+export const ArrowUpIcon = styled(ArrowUp)`
+  width: 22px;
+`;
 
 export const ArrowDownIcon = styled(ArrowDown)`
   width: 22px;

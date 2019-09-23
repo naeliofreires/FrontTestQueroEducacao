@@ -3,34 +3,40 @@ import PropTypes from 'prop-types';
 
 import * as S from './styles';
 
-export default function Card({
+const Card = ({
   logo,
   percentage,
   courseName,
   courseLevel,
   priceWithDiscount,
-}) {
-  return (
-    <S.CardWrapper>
-      <S.CardCheckImg>
-        <input type="radio" />
-        <img src={logo} alt="Imagem" />
-      </S.CardCheckImg>
-      <S.CardInformation>
-        <div className="name">
-          <span>{courseName}</span>
-          <small>{courseLevel}</small>
+}) => (
+  <S.CardWrapper>
+    <S.CardCheckImg>
+      <input type="radio" />
+      <div>
+        <img
+          src={logo}
+          alt="Logo da Universidade"
+          title="Logo da Universidade"
+        />
+      </div>
+    </S.CardCheckImg>
+    <S.CardInformation>
+      <div className="name">
+        <span>{courseName}</span>
+        <small>{courseLevel}</small>
+      </div>
+      <div className="price">
+        <div>
+          Bolsa de <span className="mark">{`${percentage}%`}</span>
         </div>
-        <div className="price">
-          <div>
-            Bolsa de <span className="mark">{`${percentage}%`}</span>
-          </div>
-          <span className="mark">{`${priceWithDiscount}/mês`}</span>
-        </div>
-      </S.CardInformation>
-    </S.CardWrapper>
-  );
-}
+        <span className="mark">{`${priceWithDiscount}/mês`}</span>
+      </div>
+    </S.CardInformation>
+  </S.CardWrapper>
+);
+
+export default Card;
 
 Card.propTypes = {
   logo: PropTypes.string.isRequired,
