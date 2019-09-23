@@ -26,10 +26,16 @@ export const ModalWrapper = styled.div`
 
 export const ModalBody = styled.div`
   width: 100%;
+
   div.close {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+  }
+
+  div.content {
+    height: 85vh;
+    overflow: scroll;
   }
 
   @media screen and (min-width: 700px) {

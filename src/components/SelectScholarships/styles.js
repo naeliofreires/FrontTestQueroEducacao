@@ -117,11 +117,6 @@ export const ContainerScholarships = styled.div`
     }
   }
 
-  div.scolharships-body {
-    height: 600px;
-    overflow: scroll;
-  }
-
   @media screen and (min-width: 700px) {
     div.scolharships-header {
       > span,

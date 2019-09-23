@@ -1,13 +1,45 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'rc-slider';
+import uuid from 'uuid';
 
 import Card from '../Card';
+
+import api from '../../services/api';
+import { formatPrice } from '../../utils/format';
 
 import * as S from './styles';
 
 export default function SelectScholarships() {
   const [price, setPrice] = useState(1000);
+  const [scholarships, setScholarships] = useState([]);
+  const [scholarshipsFiltered, setScholarshipsFiltered] = useState([]);
+
+  useEffect(() => {
+    async function loadScholarships() {
+      const response = await api.get('/scholarships');
+
+      const data = response.data.map(s => {
+        return {
+          ...s,
+          id: uuid(),
+          fullPriceFormat: formatPrice(s.full_price),
+          priceWithDiscountFormat: formatPrice(s.price_with_discount),
+        };
+      });
+
+      setScholarships(data);
+    }
+
+    loadScholarships();
+  }, []);
+
+  function filter(value) {
+    const filtered = scholarships.filter(s => s.full_price <= value);
+
+    setPrice(value);
+    setScholarshipsFiltered(filtered);
+  }
 
   return (
     <S.Wrapper>
@@ -62,7 +94,7 @@ export default function SelectScholarships() {
               min={1000}
               max={10000}
               style={{ padding: '20px 0' }}
-              onChange={value => setPrice(value)}
+              onChange={value => filter(value)}
             />
           </div>
         </div>
@@ -82,14 +114,27 @@ export default function SelectScholarships() {
         </div>
 
         <div className="scolharships-body">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {scholarshipsFiltered.length > 0
+            ? scholarshipsFiltered.map(s => (
+                <Card
+                  key={s.id}
+                  courseName={s.course.name}
+                  logo={s.university.logo_url}
+                  courseLevel={s.course.level}
+                  percentage={s.discount_percentage}
+                  priceWithDiscount={s.priceWithDiscountFormat}
+                />
+              ))
+            : scholarships.map(s => (
+                <Card
+                  key={s.id}
+                  courseName={s.course.name}
+                  logo={s.university.logo_url}
+                  courseLevel={s.course.level}
+                  percentage={s.discount_percentage}
+                  priceWithDiscount={s.priceWithDiscountFormat}
+                />
+              ))}
         </div>
       </S.ContainerScholarships>
     </S.Wrapper>
