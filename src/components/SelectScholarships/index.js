@@ -17,6 +17,9 @@ const PRESENTIAL = 'Presencial';
 export default function SelectScholarships() {
   const [citys, setCitys] = useState([]);
   const [courses, setCoures] = useState([]);
+
+  const [cityName, setCityName] = useState('');
+  const [courseName, setCourseName] = useState('');
   const [eadCheckd, setEadCheckd] = useState(false);
   const [presential, setPresential] = useState(false);
   const [orderByName, setOrderByName] = useState(false);
@@ -78,13 +81,21 @@ export default function SelectScholarships() {
         filtered = filtered.filter(s => s.course.kind === PRESENTIAL);
       }
 
+      if (cityName) {
+        filtered = filtered.filter(s => s.campus.city === cityName);
+      }
+
+      if (courseName) {
+        filtered = filtered.filter(s => s.course.name === courseName);
+      }
+
       setScholarshipsFiltered(filtered);
     }
 
     filter();
-  }, [price, eadCheckd, presential]);
+  }, [price, eadCheckd, presential, cityName, courseName]);
 
-  function orderscholarshipsByNameScholl() {
+  function orderScholarshipsByNameScholl() {
     const func = orderByName ? orderDESC : orderASC;
 
     const result =
@@ -107,7 +118,7 @@ export default function SelectScholarships() {
       <S.BoxSelect>
         <form action="">
           <S.Label>SELECIONE SUA CIDADE</S.Label>
-          <select id="city">
+          <select id="city" onChange={e => setCityName(e.target.value)}>
             <option value="" />
             {citys.map(city => (
               <option key={city} value={city}>
@@ -119,7 +130,7 @@ export default function SelectScholarships() {
 
         <form action="">
           <S.Label>SELECIONE O CURSO DE SUA PREFERENCIA</S.Label>
-          <select id="course">
+          <select id="course" onChange={e => setCourseName(e.target.value)}>
             <option value="" />
             {courses.map(course => (
               <option key={course} value={course}>
@@ -182,7 +193,7 @@ export default function SelectScholarships() {
               <input
                 type="checkbox"
                 id="filter-name"
-                onClick={orderscholarshipsByNameScholl}
+                onClick={orderScholarshipsByNameScholl}
                 onChange={e => setOrderByName(e.target.checked)}
               />
               Nome da Faculdade

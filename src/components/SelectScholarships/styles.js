@@ -113,6 +113,11 @@ export const ContainerScholarships = styled.div`
       label {
         margin-left: 0;
         color: ${Colors.SecondaryBlue};
+
+        input[type='checkbox'] {
+          position: absolute;
+          visibility: hidden;
+        }
       }
     }
   }
