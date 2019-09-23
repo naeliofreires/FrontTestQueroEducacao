@@ -6,7 +6,7 @@ import SelectScholarships from '../SelectScholarships';
 import { Wrapper, AddIcon } from './styles';
 
 export default function() {
-  const [showModal, setShowModal] = useState(!false);
+  const [showModal, setShowModal] = useState(false);
 
   function renderModal() {
     return (

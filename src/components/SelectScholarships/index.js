@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import Slider from 'rc-slider';
 
+import Card from '../Card';
+
 import * as S from './styles';
 
 export default function SelectScholarships() {
@@ -78,7 +80,17 @@ export default function SelectScholarships() {
             </label>
           </div>
         </div>
-        <div className="scolharships-body">cards bolsa</div>
+
+        <div className="scolharships-body">
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </div>
       </S.ContainerScholarships>
     </S.Wrapper>
   );

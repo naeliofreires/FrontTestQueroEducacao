@@ -117,6 +117,11 @@ export const ContainerScholarships = styled.div`
     }
   }
 
+  div.scolharships-body {
+    height: 600px;
+    overflow: scroll;
+  }
+
   @media screen and (min-width: 700px) {
     div.scolharships-header {
       > span,
@@ -131,6 +136,10 @@ export const ContainerScholarships = styled.div`
         label {
           margin-left: 10px;
         }
+      }
+
+      div.oder-by-name label {
+        margin-left: 10px;
       }
     }
   }

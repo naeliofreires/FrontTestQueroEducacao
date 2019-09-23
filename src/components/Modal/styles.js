@@ -33,7 +33,8 @@ export const ModalBody = styled.div`
   }
 
   @media screen and (min-width: 700px) {
-    width: 80%;
+    width: 70%;
+    max-width: 1140px;
   }
 `;
 
