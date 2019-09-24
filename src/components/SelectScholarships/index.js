@@ -14,7 +14,7 @@ import * as S from './styles';
 const EAD = 'EaD';
 const PRESENTIAL = 'Presencial';
 
-export default function SelectScholarships() {
+export default function SelectScholarships({ close }) {
   const [citys, setCitys] = useState([]);
   const [courses, setCoures] = useState([]);
 
@@ -27,6 +27,13 @@ export default function SelectScholarships() {
   const [price, setPrice] = useState(1000);
   const [scholarships, setScholarships] = useState([]);
   const [scholarshipsFiltered, setScholarshipsFiltered] = useState([]);
+  const [selectedScholarships, setselectedScholarships] = useState([]);
+
+  // Const
+  const priceFormated = useMemo(() => formatPrice(price), [price]);
+  const buttonDisabled = useMemo(() => selectedScholarships.length === 0, [
+    selectedScholarships,
+  ]);
 
   function extractCities(array) {
     const result = [];
@@ -106,7 +113,18 @@ export default function SelectScholarships() {
     setScholarshipsFiltered(result);
   }
 
-  const priceFormated = useMemo(() => formatPrice(price), [price]);
+  function addScholarships(check, scholarship) {
+    let newSelectedScholarships;
+    if (check) {
+      newSelectedScholarships = [...selectedScholarships, scholarship];
+    } else {
+      newSelectedScholarships = selectedScholarships.filter(
+        s => s.id !== scholarship.id
+      );
+    }
+
+    setselectedScholarships(newSelectedScholarships);
+  }
 
   return (
     <S.Wrapper>
@@ -176,7 +194,6 @@ export default function SelectScholarships() {
             <Slider
               min={1000}
               max={10000}
-              style={{ padding: '20px 0' }}
               onChange={value => setPrice(value)}
             />
           </div>
@@ -212,6 +229,7 @@ export default function SelectScholarships() {
                   courseLevel={s.course.level}
                   percentage={s.discount_percentage}
                   priceWithDiscount={s.priceWithDiscountFormat}
+                  addScholarships={check => addScholarships(check, s)}
                 />
               ))
             : scholarships.map(s => (
@@ -222,10 +240,30 @@ export default function SelectScholarships() {
                   courseLevel={s.course.level}
                   percentage={s.discount_percentage}
                   priceWithDiscount={s.priceWithDiscountFormat}
+                  addScholarships={check => addScholarships(check, s)}
                 />
               ))}
         </div>
       </S.ContainerScholarships>
+
+      <S.ContainerButtons disabled={buttonDisabled}>
+        <button
+          type="button"
+          onClick={close}
+          title="Cancelar"
+          className="cancel"
+        >
+          Cancelar
+        </button>
+        <button
+          type="button"
+          className="add"
+          disabled={buttonDisabled}
+          title="Adicionar novas bolsas"
+        >
+          Adicionar bolsa(s)
+        </button>
+      </S.ContainerButtons>
     </S.Wrapper>
   );
 }

@@ -41,4 +41,9 @@ export default createGlobalStyle`
   select::-ms-expand {
     display: none;
   }
+
+  .block-scroll {
+    height: 100%;
+    overflow: hidden;
+  }
 `;

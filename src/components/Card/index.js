@@ -8,11 +8,15 @@ const Card = ({
   percentage,
   courseName,
   courseLevel,
+  addScholarships,
   priceWithDiscount,
 }) => (
   <S.CardWrapper>
     <S.CardCheckImg>
-      <input type="radio" />
+      <input
+        type="checkbox"
+        onChange={e => addScholarships(e.target.checked)}
+      />
       <div>
         <img
           src={logo}
@@ -43,5 +47,6 @@ Card.propTypes = {
   percentage: PropTypes.number.isRequired,
   courseName: PropTypes.string.isRequired,
   courseLevel: PropTypes.string.isRequired,
+  addScholarships: PropTypes.func.isRequired,
   priceWithDiscount: PropTypes.string.isRequired,
 };

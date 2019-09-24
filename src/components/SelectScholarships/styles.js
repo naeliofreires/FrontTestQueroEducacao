@@ -70,6 +70,20 @@ export const BoxFilter = styled.div`
     flex: 1;
   }
 
+  div.box-slide {
+    div.slide {
+      .rc-slider {
+        padding: 20px 0;
+        margin: 0 10px;
+
+        .rc-slider-handle {
+          top: 15px;
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
+  }
   div.box-check form {
     padding: 20px 0;
 
@@ -145,6 +159,54 @@ export const ContainerScholarships = styled.div`
   }
 `;
 
+export const ContainerButtons = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  button {
+    flex: 1;
+    height: 70px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+
+  button.cancel {
+    padding: 20px;
+    background: transparent;
+    margin-right: 10px;
+    color: ${Colors.SecondaryBlue};
+    border: 1px solid ${Colors.SecondaryBlue};
+
+    &:hover {
+      color: #fff;
+      background: ${Colors.SecondaryBlue};
+    }
+  }
+
+  button.add {
+    padding: 20px;
+    background: ${props => (props.disabled ? Colors.Gray : 'transparent')};
+    margin-right: 10px;
+    color: ${props => (props.disabled ? 'grey' : Colors.SecondaryBlue)};
+    border: 1px solid
+      ${props => (props.disabled ? Colors.Gray : Colors.SecondaryBlue)};
+
+    &:hover {
+      color: ${props => (props.disabled ? 'grey' : '#FFFFFF')};
+      background: ${props =>
+        props.disabled ? Colors.Gray : Colors.SecondaryBlue};
+    }
+  }
+
+  @media screen and (min-width: 600px) {
+    button {
+      font-size: 16px;
+    }
+  }
+`;
 /**
  * Icons
  */
