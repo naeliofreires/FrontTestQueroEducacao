@@ -7,7 +7,7 @@ import { blockScroll, unlockScroll } from '../../utils/functions/scroll';
 import * as S from './styles';
 
 export default function() {
-  const [showModal, setShowModal] = useState(!false);
+  const [showModal, setShowModal] = useState(false);
 
   const show = () => {
     blockScroll();

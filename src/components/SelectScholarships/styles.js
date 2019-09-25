@@ -188,11 +188,11 @@ export const ContainerButtons = styled.div`
 
   button.add {
     padding: 20px;
-    background: ${props => (props.disabled ? Colors.Gray : 'transparent')};
+    background: ${props => (props.disabled ? Colors.Gray : Colors.MainYellow)};
     margin-right: 10px;
-    color: ${props => (props.disabled ? 'grey' : Colors.SecondaryBlue)};
+    color: ${props => (props.disabled ? 'grey' : Colors.Black)};
     border: 1px solid
-      ${props => (props.disabled ? Colors.Gray : Colors.SecondaryBlue)};
+      ${props => (props.disabled ? Colors.Gray : Colors.SecondaryYellow)};
 
     &:hover {
       color: ${props => (props.disabled ? 'grey' : '#FFFFFF')};

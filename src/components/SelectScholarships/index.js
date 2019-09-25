@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState, useEffect, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import Slider from 'rc-slider';
 import uuid from 'uuid';
 
@@ -124,6 +125,22 @@ export default function SelectScholarships({ close }) {
     }
 
     setselectedScholarships(newSelectedScholarships);
+  }
+
+  function save() {
+    const KEY = 'favoritesScholarships';
+    const favorites = JSON.parse(localStorage.getItem(KEY));
+
+    if (favorites) {
+      localStorage.setItem(
+        KEY,
+        JSON.stringify([...favorites, ...selectedScholarships])
+      );
+    } else {
+      localStorage.setItem(KEY, JSON.stringify(selectedScholarships));
+    }
+
+    close();
   }
 
   return (
@@ -257,6 +274,7 @@ export default function SelectScholarships({ close }) {
         </button>
         <button
           type="button"
+          onClick={save}
           className="add"
           disabled={buttonDisabled}
           title="Adicionar novas bolsas"
@@ -267,3 +285,7 @@ export default function SelectScholarships({ close }) {
     </S.Wrapper>
   );
 }
+
+SelectScholarships.propTypes = {
+  close: PropTypes.func.isRequired,
+};

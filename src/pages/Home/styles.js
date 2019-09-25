@@ -7,10 +7,10 @@ export const HomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  height: 100%;
   margin: 0 auto;
   padding: 0 20px;
   max-width: 1140px;
+  min-height: 100%;
 `;
 
 export const HomeBreadcrumbs = styled.div`
@@ -117,12 +117,25 @@ export const HomeSubMenu = styled.div`
 `;
 
 export const HomeContainerScholarships = styled.div`
+  margin: 50px 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 30px 0;
+  flex-direction: column;
 
-  @media screen and (min-width: 600px) {
-    justify-content: flex-start;
+  @media screen and (min-width: 550px) {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 730px) {
+    grid-gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (min-width: 950px) {
+    grid-gap: 30px;
+    grid-template-columns: repeat(4, 1fr);
   }
 `;

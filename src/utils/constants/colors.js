@@ -3,7 +3,7 @@ export default {
   SecondaryBlue: '#007A8D',
   Background: '#FBFBFB',
   MainYellow: '#FDCB13',
-  SecondayYellow: '#DE9E1F',
+  SecondaryYellow: '#DE9E1F',
   Green: '#0FA866',
   Black: '#1F2D30',
   Gray: '#adadad',

@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import AddScholarships from '../../components/AddScholarships';
+import Scholarship from '../../components/Scholarship';
 
 import * as S from './styles';
 
 export default function Home() {
+  const [favoritesScholarships, setFavoritesScholarships] = useState([]);
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem('favoritesScholarships'));
+    if (favorites) setFavoritesScholarships(favorites);
+  }, []);
+
   return (
     <S.HomeWrapper>
       <S.HomeBreadcrumbs>
@@ -32,6 +40,10 @@ export default function Home() {
 
       <S.HomeContainerScholarships>
         <AddScholarships />
+
+        {favoritesScholarships.map(fs => (
+          <Scholarship key={fs.key} logo={fs.university.logo_url} />
+        ))}
       </S.HomeContainerScholarships>
     </S.HomeWrapper>
   );

@@ -7,7 +7,8 @@ import Colors from '../../utils/constants/colors';
 export const Wrapper = styled.div`
   padding: 20px;
   width: 100%;
-  height: fit-content;
+  max-width: 320px;
+  height: 100%;
   box-shadow: 0px 5px 14px 0px ${Colors.Gray};
   -moz-box-shadow: 0px 5px 14px 0px ${Colors.Gray};
   -webkit-box-shadow: 0px 5px 14px 0px ${Colors.Gray};
@@ -35,11 +36,6 @@ export const Wrapper = styled.div`
       text-align: center;
       color: ${Colors.Gray};
     }
-  }
-
-  @media screen and (min-width: 600px) {
-    height: 300px;
-    max-width: 240px;
   }
 `;
 
