@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   padding: 20px;
   width: 100%;
   max-width: 320px;
-  height: 100%;
+  height: 458px;
   box-shadow: 0px 5px 14px 0px ${Colors.Gray};
   -moz-box-shadow: 0px 5px 14px 0px ${Colors.Gray};
   -webkit-box-shadow: 0px 5px 14px 0px ${Colors.Gray};

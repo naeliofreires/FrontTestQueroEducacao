@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import StarRatings from 'react-star-ratings';
 
+import Colors from '../../utils/constants/colors.js';
+
 import * as S from './styles';
 
 export default function Scholarships({
@@ -47,7 +49,7 @@ export default function Scholarships({
               starSpacing="0"
               numberOfStars={5}
               starDimension="20"
-              starRatedColor="yellow"
+              starRatedColor={Colors.SecondaryYellow}
             />
           </div>
         </div>
@@ -86,6 +88,7 @@ Scholarships.propTypes = {
   kind: PropTypes.string.isRequired,
   start: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
+  enabled: PropTypes.bool.isRequired,
   shift: PropTypes.string.isRequired,
   nameCourse: PropTypes.string.isRequired,
   nameUniversity: PropTypes.string.isRequired,

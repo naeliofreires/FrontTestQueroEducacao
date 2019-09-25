@@ -7,7 +7,7 @@ import * as S from './styles';
 
 export default function Home() {
   const [favoritesScholarships, setFavoritesScholarships] = useState([]);
-  const [favoritesFiltered, setFavoritesFiltered] = useState([]);
+  const [favoritesFiltered, setFavoritesFiltered] = useState(null);
 
   function loadScholarships() {
     const favorites = JSON.parse(localStorage.getItem('favoritesScholarships'));
@@ -20,7 +20,8 @@ export default function Home() {
 
   function filterBySemester(semester) {
     if (!semester) {
-      setFavoritesFiltered([]);
+      setFavoritesFiltered(null);
+      return;
     }
 
     const result = favoritesScholarships.filter(
@@ -53,8 +54,8 @@ export default function Home() {
             role="button"
             tabIndex={0}
             className="submenu-item"
-            onClick={filterBySemester}
-            onKeyDown={filterBySemester}
+            onClick={() => filterBySemester()}
+            onKeyDown={() => filterBySemester()}
           >
             Todos os semestres
           </div>
@@ -81,7 +82,7 @@ export default function Home() {
 
       <S.HomeContainerScholarships>
         <AddScholarships loadScholarships={loadScholarships} />
-        {favoritesFiltered.length > 0
+        {favoritesFiltered
           ? favoritesFiltered.map(fs => (
               <Scholarship
                 id={fs.id}
