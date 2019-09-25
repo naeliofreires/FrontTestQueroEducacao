@@ -56,6 +56,7 @@ export default function SelectScholarships({ close }) {
     setCoures(result.sort());
   }
 
+  // Load Scholarships
   useEffect(() => {
     async function loadScholarships() {
       const response = await api.get('/scholarships');
@@ -77,6 +78,7 @@ export default function SelectScholarships({ close }) {
     loadScholarships();
   }, []);
 
+  // Filter
   useEffect(() => {
     function filter() {
       let filtered = scholarships.filter(s => s.full_price <= price);
@@ -101,7 +103,14 @@ export default function SelectScholarships({ close }) {
     }
 
     filter();
-  }, [price, eadCheckd, presential, cityName, courseName]);
+  }, [
+    price,
+    eadCheckd,
+    presential,
+    cityName,
+    courseName,
+    selectedScholarships,
+  ]);
 
   function orderScholarshipsByNameScholl() {
     const func = orderByName ? orderDESC : orderASC;
@@ -127,6 +136,7 @@ export default function SelectScholarships({ close }) {
     setselectedScholarships(newSelectedScholarships);
   }
 
+  // Save in localStorage
   function save() {
     const KEY = 'favoritesScholarships';
     const favorites = JSON.parse(localStorage.getItem(KEY));

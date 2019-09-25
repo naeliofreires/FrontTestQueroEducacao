@@ -141,11 +141,11 @@ export const ScholarshipButton = styled.div`
   justify-content: center;
 
   > button {
-    flex: 1;
     padding: 10px;
 
     &:first-child {
-      margin-right: 30px;
+      width: 80px;
+      margin-right: 10px;
     }
   }
 
@@ -158,10 +158,12 @@ export const ScholarshipButton = styled.div`
   }
 
   > button.see-offer {
+    flex: 1;
     font-weight: bold;
-    background: ${Colors.MainYellow};
+    background: ${props => (props.enabled ? Colors.MainYellow : Colors.Gray)};
     color: ${Colors.Black};
     border-radius: 5px;
-    border: 1px solid ${Colors.SecondaryYellow};
+    border: 1px solid
+      ${props => (props.enabled ? Colors.SecondaryYellow : Colors.Black)};
   }
 `;

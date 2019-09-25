@@ -4,7 +4,20 @@ import StarRatings from 'react-star-ratings';
 
 import * as S from './styles';
 
-export default function Scholarships({ id, logo, loadScholarships }) {
+export default function Scholarships({
+  id,
+  logo,
+  kind,
+  start,
+  score,
+  shift,
+  enabled,
+  nameCourse,
+  nameUniversity,
+  fullPriceFormat,
+  loadScholarships,
+  priceWithDiscountFormat,
+}) {
   function deleteScholarships() {
     const KEY = 'favoritesScholarships';
     const favorites = JSON.parse(localStorage.getItem(KEY));
@@ -24,13 +37,13 @@ export default function Scholarships({ id, logo, loadScholarships }) {
           <img src={logo} alt="" />
         </div>
         <div className="info">
-          <span className="name">Anhaguera</span>
-          <span className="course">Sistemas de Informação</span>
+          <span className="name">{nameUniversity}</span>
+          <span className="course">{nameCourse}</span>
           <div className="note">
-            <span>3.8</span>
+            <span>{score}</span>
             <StarRatings
-              rating={3.8}
               name="rating"
+              rating={score}
               starSpacing="0"
               numberOfStars={5}
               starDimension="20"
@@ -41,24 +54,26 @@ export default function Scholarships({ id, logo, loadScholarships }) {
       </S.ScholarshipHeader>
 
       <S.ScholarshipInfoCourse>
-        <span className="type">Presencial • Noite</span>
-        <span className="start-class">Início das aulas em: 05/03/2020</span>
+        <span className="type">
+          {kind === 'EaD' ? 'ENSINO A DISTÂNCIA' : kind} • {shift}
+        </span>
+        <span className="start-class">Início das aulas em: {start}</span>
       </S.ScholarshipInfoCourse>
 
       <S.ScholarshipPrice>
         <span className="title">Mensalidde com o Quero Bolsa:</span>
-        <span className="discount">1.487,31</span>
+        <span className="discount">{fullPriceFormat}</span>
         <span className="price-promotion">
-          R$ 453,64 <small>/mês</small>
+          {priceWithDiscountFormat} <small>/mês</small>
         </span>
       </S.ScholarshipPrice>
 
-      <S.ScholarshipButton>
+      <S.ScholarshipButton enabled={enabled}>
         <button type="button" onClick={deleteScholarships} className="delete">
           Excluir
         </button>
-        <button type="button" className="see-offer">
-          Ver Oferta
+        <button disabled={enabled} type="button" className="see-offer">
+          {enabled ? 'Ver Oferta' : 'Indisponível'}
         </button>
       </S.ScholarshipButton>
     </S.ScholarshipWrapper>
@@ -68,5 +83,13 @@ export default function Scholarships({ id, logo, loadScholarships }) {
 Scholarships.propTypes = {
   id: PropTypes.string.isRequired,
   logo: PropTypes.string.isRequired,
+  kind: PropTypes.string.isRequired,
+  start: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+  shift: PropTypes.string.isRequired,
+  nameCourse: PropTypes.string.isRequired,
+  nameUniversity: PropTypes.string.isRequired,
   loadScholarships: PropTypes.func.isRequired,
+  fullPriceFormat: PropTypes.string.isRequired,
+  priceWithDiscountFormat: PropTypes.string.isRequired,
 };
