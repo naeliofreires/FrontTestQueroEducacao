@@ -14,6 +14,7 @@ import * as S from './styles';
 
 const EAD = 'EaD';
 const PRESENTIAL = 'Presencial';
+const KEY = 'favoritesScholarships';
 
 export default function SelectScholarships({ close }) {
   const [citys, setCitys] = useState([]);
@@ -56,25 +57,27 @@ export default function SelectScholarships({ close }) {
     setCoures(result.sort());
   }
 
-  // Load Scholarships
+  async function loadScholarships() {
+    const response = await api.get('/scholarships');
+    const favorites = JSON.parse(localStorage.getItem(KEY));
+
+    const data = response.data.map(s => {
+      const id = `${s.course.name}_${s.course.kind}_${s.university.name}`;
+      return {
+        ...s,
+        id,
+        check: !!favorites.find(sf => sf.id === id),
+        fullPriceFormat: formatPrice(s.full_price),
+        priceWithDiscountFormat: formatPrice(s.price_with_discount),
+      };
+    });
+
+    extractCities(data);
+    extractCourses(data);
+    setScholarships(data);
+  }
+
   useEffect(() => {
-    async function loadScholarships() {
-      const response = await api.get('/scholarships');
-
-      const data = response.data.map(s => {
-        return {
-          ...s,
-          id: uuid(),
-          fullPriceFormat: formatPrice(s.full_price),
-          priceWithDiscountFormat: formatPrice(s.price_with_discount),
-        };
-      });
-
-      extractCities(data);
-      extractCourses(data);
-      setScholarships(data);
-    }
-
     loadScholarships();
   }, []);
 
@@ -138,7 +141,6 @@ export default function SelectScholarships({ close }) {
 
   // Save in localStorage
   function save() {
-    const KEY = 'favoritesScholarships';
     const favorites = JSON.parse(localStorage.getItem(KEY));
 
     if (favorites) {
@@ -248,28 +250,36 @@ export default function SelectScholarships({ close }) {
 
         <div className="scolharships-body">
           {scholarshipsFiltered.length > 0
-            ? scholarshipsFiltered.map(s => (
-                <Card
-                  key={s.id}
-                  courseName={s.course.name}
-                  logo={s.university.logo_url}
-                  courseLevel={s.course.level}
-                  percentage={s.discount_percentage}
-                  priceWithDiscount={s.priceWithDiscountFormat}
-                  addScholarships={check => addScholarships(check, s)}
-                />
-              ))
-            : scholarships.map(s => (
-                <Card
-                  key={s.id}
-                  courseName={s.course.name}
-                  logo={s.university.logo_url}
-                  courseLevel={s.course.level}
-                  percentage={s.discount_percentage}
-                  priceWithDiscount={s.priceWithDiscountFormat}
-                  addScholarships={check => addScholarships(check, s)}
-                />
-              ))}
+            ? scholarshipsFiltered.map(
+                s =>
+                  !s.check && (
+                    <Card
+                      key={s.id}
+                      check={s.check}
+                      courseName={s.course.name}
+                      logo={s.university.logo_url}
+                      courseLevel={s.course.level}
+                      percentage={s.discount_percentage}
+                      priceWithDiscount={s.priceWithDiscountFormat}
+                      addScholarships={check => addScholarships(check, s)}
+                    />
+                  )
+              )
+            : scholarships.map(
+                s =>
+                  !s.check && (
+                    <Card
+                      key={s.id}
+                      check={s.check}
+                      courseName={s.course.name}
+                      logo={s.university.logo_url}
+                      courseLevel={s.course.level}
+                      percentage={s.discount_percentage}
+                      priceWithDiscount={s.priceWithDiscountFormat}
+                      addScholarships={check => addScholarships(check, s)}
+                    />
+                  )
+              )}
         </div>
       </S.ContainerScholarships>
 
