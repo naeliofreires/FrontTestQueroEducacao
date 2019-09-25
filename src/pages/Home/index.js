@@ -8,9 +8,13 @@ import * as S from './styles';
 export default function Home() {
   const [favoritesScholarships, setFavoritesScholarships] = useState([]);
 
-  useEffect(() => {
+  function loadScholarships() {
     const favorites = JSON.parse(localStorage.getItem('favoritesScholarships'));
     if (favorites) setFavoritesScholarships(favorites);
+  }
+
+  useEffect(() => {
+    loadScholarships();
   }, []);
 
   return (
@@ -39,10 +43,15 @@ export default function Home() {
       </S.HomeSubMenu>
 
       <S.HomeContainerScholarships>
-        <AddScholarships />
+        <AddScholarships loadScholarships={loadScholarships} />
 
         {favoritesScholarships.map(fs => (
-          <Scholarship key={fs.key} logo={fs.university.logo_url} />
+          <Scholarship
+            id={fs.id}
+            key={fs.id}
+            logo={fs.university.logo_url}
+            loadScholarships={loadScholarships}
+          />
         ))}
       </S.HomeContainerScholarships>
     </S.HomeWrapper>

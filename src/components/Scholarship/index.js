@@ -1,9 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import StarRatings from 'react-star-ratings';
 
 import * as S from './styles';
 
-export default function Scholarships({ logo }) {
+export default function Scholarships({ id, logo, loadScholarships }) {
+  function deleteScholarships() {
+    const KEY = 'favoritesScholarships';
+    const favorites = JSON.parse(localStorage.getItem(KEY));
+
+    localStorage.setItem(
+      KEY,
+      JSON.stringify(favorites.filter(s => s.id !== id))
+    );
+
+    loadScholarships();
+  }
+
   return (
     <S.ScholarshipWrapper>
       <S.ScholarshipHeader>
@@ -18,9 +31,9 @@ export default function Scholarships({ logo }) {
             <StarRatings
               rating={3.8}
               name="rating"
-              starSpacing={0}
+              starSpacing="0"
               numberOfStars={5}
-              starDimension={20}
+              starDimension="20"
               starRatedColor="yellow"
             />
           </div>
@@ -41,7 +54,7 @@ export default function Scholarships({ logo }) {
       </S.ScholarshipPrice>
 
       <S.ScholarshipButton>
-        <button type="button" className="delete">
+        <button type="button" onClick={deleteScholarships} className="delete">
           Excluir
         </button>
         <button type="button" className="see-offer">
@@ -51,3 +64,9 @@ export default function Scholarships({ logo }) {
     </S.ScholarshipWrapper>
   );
 }
+
+Scholarships.propTypes = {
+  id: PropTypes.string.isRequired,
+  logo: PropTypes.string.isRequired,
+  loadScholarships: PropTypes.func.isRequired,
+};

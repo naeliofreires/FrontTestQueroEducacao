@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import Modal from '../Modal';
 import SelectScholarships from '../SelectScholarships';
@@ -6,7 +7,7 @@ import SelectScholarships from '../SelectScholarships';
 import { blockScroll, unlockScroll } from '../../utils/functions/scroll';
 import * as S from './styles';
 
-export default function() {
+export default function AddScholarships({ loadScholarships }) {
   const [showModal, setShowModal] = useState(false);
 
   const show = () => {
@@ -17,6 +18,7 @@ export default function() {
   const close = () => {
     unlockScroll();
     setShowModal(false);
+    loadScholarships();
   };
 
   function renderModal() {
@@ -42,3 +44,7 @@ export default function() {
     </>
   );
 }
+
+AddScholarships.propTypes = {
+  loadScholarships: PropTypes.func.isRequired,
+};
