@@ -5,18 +5,18 @@ import { DiffAdded as Add } from 'styled-icons/octicons/DiffAdded';
 import Colors from '../../utils/constants/colors';
 
 export const Wrapper = styled.div`
-  padding: 20px;
   width: 100%;
-  max-width: 320px;
-  height: 458px;
-  box-shadow: 0px 5px 14px 0px ${Colors.Gray};
-  -moz-box-shadow: 0px 5px 14px 0px ${Colors.Gray};
-  -webkit-box-shadow: 0px 5px 14px 0px ${Colors.Gray};
+  height: 250px;
+  padding: 20px;
 
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+
+  box-shadow: 0px 5px 14px 0px ${Colors.Gray};
+  -moz-box-shadow: 0px 5px 14px 0px ${Colors.Gray};
+  -webkit-box-shadow: 0px 5px 14px 0px ${Colors.Gray};
 
   div.text {
     padding: 20px;
@@ -36,6 +36,14 @@ export const Wrapper = styled.div`
       text-align: center;
       color: ${Colors.Gray};
     }
+  }
+
+  @media screen and (min-width: 450px) {
+    max-width: 320px;
+  }
+
+  @media screen and (min-width: 600px) {
+    height: 458px;
   }
 `;
 
