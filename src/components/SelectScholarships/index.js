@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'rc-slider';
-import uuid from 'uuid';
 
 import Card from '../Card';
 
@@ -66,7 +65,7 @@ export default function SelectScholarships({ close }) {
       return {
         ...s,
         id,
-        check: favorites && !!favorites.find(sf => sf.id === id),
+        check: favorites && !!favorites.find(sf => sf.id === id), // check if is a favorite
         fullPriceFormat: formatPrice(s.full_price),
         priceWithDiscountFormat: formatPrice(s.price_with_discount),
       };

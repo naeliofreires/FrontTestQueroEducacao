@@ -35,7 +35,10 @@ export default function Home() {
     <S.HomeWrapper>
       <S.HomeBreadcrumbs>
         <S.BreadcrumbsLink to="/">Home</S.BreadcrumbsLink>
-        <S.BreadcrumbsLink to="/">Minha conta</S.BreadcrumbsLink>
+        <S.BreadcrumbsLink to="/">
+          <S.ArrowBack />
+          Minha conta
+        </S.BreadcrumbsLink>
         <span className="actual"> Bolsas favoritas</span>
       </S.HomeBreadcrumbs>
 

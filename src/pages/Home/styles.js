@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import { KeyboardArrowLeft } from 'styled-icons/material/KeyboardArrowLeft';
+
 import Colors from '../../utils/constants/colors';
 
 export const HomeWrapper = styled.div`
@@ -17,29 +19,52 @@ export const HomeBreadcrumbs = styled.div`
   margin: 20px 0;
 
   span.actual {
-    color: ${Colors.Gray};
-    font-weight: bold;
-    padding: 10px;
+    display: none;
+  }
+
+  @media screen and (min-width: 700px) {
+    display: flex;
+    span.actual {
+      display: block;
+      color: ${Colors.Gray};
+      font-weight: bold;
+      padding: 10px;
+    }
   }
 `;
 
 export const BreadcrumbsLink = styled(Link)`
   cursor: pointer;
-  padding: 10px;
+  display: flex;
+  align-items: center;
+
   font-weight: bold;
   text-decoration: none;
   color: ${Colors.SecondaryBlue};
 
-  &:after {
-    content: '/';
-    color: ${Colors.Gray};
-    position: relative;
-    left: 15px;
-    margin-right: 10px;
+  &:first-child {
+    display: none;
   }
 
-  &:first-child {
-    padding-left: 0;
+  @media screen and (min-width: 700px) {
+    padding: 10px;
+
+    > svg {
+      display: none;
+    }
+
+    &:after {
+      content: '/';
+      color: ${Colors.Gray};
+      position: relative;
+      left: 15px;
+      margin-right: 10px;
+    }
+
+    &:first-child {
+      display: initial;
+      padding-left: 0;
+    }
   }
 `;
 
@@ -138,4 +163,11 @@ export const HomeContainerScholarships = styled.div`
     grid-gap: 30px;
     grid-template-columns: repeat(4, 1fr);
   }
+`;
+
+/**
+ * Icons
+ */
+export const ArrowBack = styled(KeyboardArrowLeft)`
+  width: 22px;
 `;
