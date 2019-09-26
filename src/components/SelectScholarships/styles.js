@@ -75,7 +75,7 @@ export const BoxFilter = styled.div`
       .rc-slider {
         padding: 20px 0;
         margin: 0 10px;
-
+        width: -webkit-fill-available;
         .rc-slider-handle {
           top: 15px;
           width: 25px;
