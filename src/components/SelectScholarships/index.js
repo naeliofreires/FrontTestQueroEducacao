@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Slider from 'rc-slider';
 
 import Card from '../Card';
+import InputCheck from '../InputCheck';
 
 import api from '../../services/api';
 import { formatPrice } from '../../utils/format';
@@ -191,27 +192,19 @@ export default function SelectScholarships({ close }) {
         <div className="box-check">
           <S.Label>COMO VOCÊ QUER ESTUDAR?</S.Label>
           <form>
-            <label htmlFor="presencial">
-              <input
-                id="presencial"
-                type="checkbox"
-                name="presencial"
-                checked={presential}
-                onChange={e => setPresential(e.target.checked)}
-              />
-              Presencial
-            </label>
+            <InputCheck
+              id="presencial"
+              text="Presencial"
+              checked={presential}
+              onChange={e => setPresential(e.target.checked)}
+            />
 
-            <label htmlFor="distancia">
-              <input
-                id="distancia"
-                type="checkbox"
-                name="distancia"
-                checked={eadCheckd}
-                onChange={e => setEadCheckd(e.target.checked)}
-              />
-              A distância
-            </label>
+            <InputCheck
+              id="distancia"
+              text="A distância"
+              checked={eadCheckd}
+              onChange={e => setEadCheckd(e.target.checked)}
+            />
           </form>
         </div>
 

@@ -84,8 +84,11 @@ export const BoxFilter = styled.div`
       }
     }
   }
+
   div.box-check form {
     padding: 20px 0;
+    display: flex;
+    margin-left: -15px;
 
     input {
       margin-right: 5px;
@@ -98,6 +101,7 @@ export const BoxFilter = styled.div`
 
   @media screen and (min-width: 700px) {
     flex-direction: row;
+
     div.box-check {
       margin-right: 30px;
     }

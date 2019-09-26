@@ -21,11 +21,7 @@ export const CardCheckImg = styled.div`
   display: flex;
   align-items: center;
 
-  input {
-    flex: 1;
-  }
-
-  > div {
+  > div.box-logo {
     flex: 2;
     padding: 20px;
     img {

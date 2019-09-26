@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import InputCheck from '../InputCheck';
+
 import * as S from './styles';
 
 const Card = ({
@@ -13,11 +15,8 @@ const Card = ({
 }) => (
   <S.CardWrapper>
     <S.CardCheckImg>
-      <input
-        type="checkbox"
-        onChange={e => addScholarships(e.target.checked)}
-      />
-      <div>
+      <InputCheck onChange={e => addScholarships(e.target.checked)} />
+      <div className="box-logo">
         <img
           src={logo}
           alt="Logo da Universidade"
