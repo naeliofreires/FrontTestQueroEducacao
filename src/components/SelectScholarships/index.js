@@ -26,7 +26,7 @@ export default function SelectScholarships({ close }) {
   const [presential, setPresential] = useState(false);
   const [orderByName, setOrderByName] = useState(false);
 
-  const [price, setPrice] = useState(1000);
+  const [price, setPrice] = useState(0);
   const [scholarships, setScholarships] = useState([]);
   const [scholarshipsFiltered, setScholarshipsFiltered] = useState([]);
   const [selectedScholarships, setselectedScholarships] = useState([]);
@@ -59,14 +59,14 @@ export default function SelectScholarships({ close }) {
 
   async function loadScholarships() {
     const response = await api.get('/scholarships');
-    const favorites = JSON.parse(localStorage.getItem(KEY));
+    const favorites = await JSON.parse(localStorage.getItem(KEY));
 
     const data = response.data.map(s => {
       const id = `${s.course.name}_${s.course.kind}_${s.university.name}`;
       return {
         ...s,
         id,
-        check: !!favorites.find(sf => sf.id === id),
+        check: favorites && !!favorites.find(sf => sf.id === id),
         fullPriceFormat: formatPrice(s.full_price),
         priceWithDiscountFormat: formatPrice(s.price_with_discount),
       };
@@ -220,11 +220,7 @@ export default function SelectScholarships({ close }) {
           <S.Label> ATÉ QUANTO PODE PAGAR?</S.Label>
           <div className="slide">
             {priceFormated}
-            <Slider
-              min={1000}
-              max={10000}
-              onChange={value => setPrice(value)}
-            />
+            <Slider min={0} max={10000} onChange={value => setPrice(value)} />
           </div>
         </div>
       </S.BoxFilter>

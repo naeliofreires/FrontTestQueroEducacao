@@ -4,9 +4,10 @@ import Colors from '../../utils/constants/colors';
 
 export const ScholarshipWrapper = styled.div`
   width: 100%;
-  max-width: 320px;
   padding: 20px;
+  height: 458px;
   margin: 20px 0;
+  max-width: 320px;
 
   display: flex;
   align-items: center;
