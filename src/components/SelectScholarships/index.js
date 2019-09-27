@@ -24,7 +24,7 @@ export default function SelectScholarships({ close }) {
   const [courseName, setCourseName] = useState('');
   const [eadCheckd, setEadCheckd] = useState(false);
   const [presential, setPresential] = useState(false);
-  const [orderByName, setOrderByName] = useState(false);
+  const [orderByName, setOrderByName] = useState(true);
 
   const [price, setPrice] = useState(0);
   const [scholarships, setScholarships] = useState([]);
@@ -116,7 +116,7 @@ export default function SelectScholarships({ close }) {
   ]);
 
   function orderScholarshipsByNameScholl() {
-    const func = orderByName ? orderDESC : orderASC;
+    const func = orderByName ? orderASC : orderDESC;
 
     const result =
       scholarshipsFiltered.length > 0
@@ -125,6 +125,11 @@ export default function SelectScholarships({ close }) {
 
     setScholarshipsFiltered(result);
   }
+
+  useEffect(() => {
+    console.log('chama', orderByName);
+    orderScholarshipsByNameScholl();
+  }, [scholarships, orderByName]);
 
   function addScholarships(check, scholarship) {
     let newSelectedScholarships;
@@ -227,7 +232,7 @@ export default function SelectScholarships({ close }) {
               <input
                 type="checkbox"
                 id="filter-name"
-                onClick={orderScholarshipsByNameScholl}
+                value={orderByName}
                 onChange={e => setOrderByName(e.target.checked)}
               />
               Nome da Faculdade
